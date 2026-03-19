@@ -1,4 +1,4 @@
-# 🚀 Career Navigator — Skill-Bridge Career Platform
+# Career Navigator — Skill-Bridge Career Platform
 
 > A Palo Alto Networks New Grad SWE Take-Home Case Study submission
 
@@ -105,7 +105,7 @@ career-navigator/
 ## AI Disclosure
 
 **Did you use an AI assistant (Copilot, ChatGPT, etc.)?**
-Yes — Claude (Anthropic) was used during development.
+Yes — AI Tools were used during development.
 
 **How did you verify the suggestions?**
 Every code suggestion was reviewed manually before use. I tested each endpoint with real requests via the browser and checked edge cases (empty users, missing roles, case mismatches) to confirm behaviour was correct. AI-generated test cases were cross-checked against the actual function logic in `utils.py`.
@@ -130,7 +130,6 @@ The AI initially suggested using `set(job_skills) - set(user_skills)` for gap ca
 - Cloud deployment with a persistent database (PostgreSQL) replacing the JSON files
 
 **Known limitations:**
-- `jobs.json` contains only 3 roles — gap analysis is limited to Cloud Engineer, Backend Developer, and DevOps Engineer
 - User data is stored in a flat JSON file; concurrent writes could cause data loss
 - Gemini API has rate limits; heavy usage may trigger the fallback more than expected
 - No authentication — any client can read or modify any user's profile by guessing their user ID
