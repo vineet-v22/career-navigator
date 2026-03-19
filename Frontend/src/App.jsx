@@ -172,7 +172,7 @@ const style = `
   .btn-row .btn { flex: 1; }
 `;
 
-// ── helpers ──────────────────────────────────────────
+
 
 function matchColor(pct) {
   if (pct >= 70) return "var(--accent3)";
@@ -180,7 +180,6 @@ function matchColor(pct) {
   return "var(--accent2)";
 }
 
-// ── component ────────────────────────────────────────
 
 export default function App() {
   const [userId, setUserId]         = useState("");
@@ -188,8 +187,8 @@ export default function App() {
   const [skills, setSkills]         = useState("");
   const [roleSearch, setRoleSearch] = useState("");
 
-  const [result, setResult]         = useState(null);       // analyze response
-  const [interview, setInterview]   = useState(null);       // mock interview response
+  const [result, setResult]         = useState(null);       
+  const [interview, setInterview]   = useState(null);       
   const [roles, setRoles]           = useState([]);
 
   const [error, setError]           = useState("");
@@ -197,7 +196,7 @@ export default function App() {
   const [loadingAnalyze, setLoadingAnalyze] = useState(false);
   const [loadingInterview, setLoadingInterview] = useState(false);
 
-  // ── 1. Analyze gap ──────────────────────────────────
+  //1. Analyze gap
   const analyze = async () => {
     setError(""); setResult(null); setInterview(null); setSuccess("");
     const cleanUser = userId.trim();
@@ -217,7 +216,7 @@ export default function App() {
     }
   };
 
-  // ── 2. Mock interview ───────────────────────────────
+  // ── 2. Mock interview 
   const fetchInterview = async () => {
     setError(""); setInterview(null); setSuccess("");
     const cleanUser = userId.trim();
@@ -237,7 +236,7 @@ export default function App() {
     }
   };
 
-  // ── 3. Add skills ───────────────────────────────────
+  //3. Add skills
   const updateSkills = async () => {
     setError(""); setSuccess("");
     const cleanUser = userId.trim();
@@ -260,7 +259,7 @@ export default function App() {
     }
   };
 
-  // ── 4. Load / search roles ──────────────────────────
+  //4. Load / search roles
   const loadRoles = async (search = "") => {
     setError("");
     try {
@@ -283,7 +282,7 @@ export default function App() {
 
   const pickRole = (r) => { setRole(r); setInterview(null); setResult(null); };
 
-  // ── match score colour & label ──────────────────────
+  // ── match score colour & label
   const pct   = result?.match_score ?? 0;
   const color = matchColor(pct);
 
