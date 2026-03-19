@@ -1,0 +1,19 @@
+[
+  {
+    "user_id": "1",
+    "skills": [
+      "Python",
+      "HTML",
+      "CSS",
+      "Docker",
+      "JS"
+    ]
+  },
+  {
+    "user_id": "2",
+    "skills": [
+      "dsa",
+      "ml"
+    ]
+  }
+]

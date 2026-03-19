@@ -1,0 +1,14 @@
+[
+  {
+    "role": "Cloud Engineer",
+    "skills": ["AWS", "Docker", "Kubernetes", "Linux"]
+  },
+  {
+    "role": "Backend Developer",
+    "skills": ["Node.js", "MongoDB", "API", "Docker"]
+  },
+  {
+    "role": "DevOps Engineer",
+    "skills": ["CI/CD", "Docker", "Kubernetes", "AWS", "Linux"]
+  }
+]
