@@ -18,9 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ─────────────────────────────────────────────
-# HELPERS  (reads your actual JSON files)
-# ─────────────────────────────────────────────
+
 
 def load_users() -> list:
     try:
@@ -47,16 +45,14 @@ def get_job(role: str) -> dict | None:
     return next((j for j in jobs if j["role"].lower() == role.lower()), None)
 
 
-# ─────────────────────────────────────────────
 # ROUTES
-# ─────────────────────────────────────────────
 
 @app.get("/")
 def home():
     return {"message": "Career Navigator API is running 🚀"}
 
 
-# ── 1. Analyze skill gap ──────────────────────
+#1. Analyze skill gap 
 @app.get("/analyze/{user_id}/{role}")
 def analyze_role(user_id: str, role: str):
     result = find_role_gap(role, user_id)
@@ -83,13 +79,13 @@ def analyze_role(user_id: str, role: str):
         "role": result["role"],
         "your_skills": result["your_skills"],
         "missing_skills": result["missing_skills"],
-        "match_score": match_pct,          # ← new: skill match percentage
+        "match_score": match_pct,         
         "roadmap": roadmap_data["steps"],
         "generated_by": roadmap_data["source"]
     }
 
 
-# ── 2. List / search roles ────────────────────
+#2. List / search roles
 @app.get("/roles")
 def get_roles(search: str = ""):
     jobs = load_jobs()
@@ -98,7 +94,6 @@ def get_roles(search: str = ""):
     return {"roles": [job["role"] for job in jobs]}
 
 
-# ── 3. Search roles (kept for backwards compat) ──
 @app.get("/search")
 def search_role(query: str = ""):
     if not query.strip():
@@ -108,7 +103,7 @@ def search_role(query: str = ""):
     return {"results": filtered}
 
 
-# ── 4. Add / update user skills ───────────────
+# ── 4. Add / update user skills
 @app.post("/update-skills/{user_id}")
 def update_skills(user_id: str, new_skills: list = Body(...)):
     if not user_id.strip():
@@ -122,21 +117,20 @@ def update_skills(user_id: str, new_skills: list = Body(...)):
     user = next((u for u in users if u["user_id"] == user_id), None)
 
     if not user:
-        # auto-create new user
+
         user = {"user_id": user_id, "skills": []}
         users.append(user)
 
-    # merge, deduplicate (case-insensitive, preserve original casing)
     merged = {s.lower(): s for s in user["skills"]}
     for s in cleaned:
-        merged[s.lower()] = s          # new skill overwrites casing if duplicate
+        merged[s.lower()] = s         
     user["skills"] = list(merged.values())
 
     save_users(users)
     return {"user_id": user_id, "skills": user["skills"]}
 
 
-# ── 5. Mock interview questions ───────────────
+#5. Mock interview questions
 @app.get("/mock-interview/{user_id}/{role}")
 def mock_interview(user_id: str, role: str):
     user = get_user(user_id)
@@ -156,14 +150,14 @@ def mock_interview(user_id: str, role: str):
     user_skills_lower = [s.lower() for s in user["skills"]]
     missing = [s for s in job["skills"] if s.lower() not in user_skills_lower]
 
-    # If no missing skills, generate questions on ALL required skills
+
     target_skills = missing if missing else job["skills"]
 
     result = generate_interview_questions(target_skills, role)
     return result
 
 
-# ── 6. Get user profile ───────────────────────
+# 6. Get user profile
 @app.get("/user/{user_id}")
 def get_user_profile(user_id: str):
     user = get_user(user_id)

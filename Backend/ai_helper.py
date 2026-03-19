@@ -111,7 +111,7 @@ def _configure_gemini():
     if not api_key:
         raise Exception("GEMINI_API_KEY not set")
     genai.configure(api_key=api_key)
-    return genai.GenerativeModel("gemini-2.0-flash-lite")
+    return genai.GenerativeModel("gemini-3.1-flash-lite-preview")
 
 
 def _extract_json(text: str) -> dict:

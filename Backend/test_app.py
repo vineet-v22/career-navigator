@@ -1,8 +1,6 @@
 from utils import get_missing_skills
 
-# ─────────────────────────────────────────────
 # UNIT TESTS — get_missing_skills()
-# ─────────────────────────────────────────────
 
 def test_happy_path():
     """User has some skills — missing ones should be returned."""
@@ -12,7 +10,7 @@ def test_happy_path():
     result = get_missing_skills(user, job)
 
     assert "Docker" in result
-    assert "Python" not in result        # already has it
+    assert "Python" not in result        
 
 def test_edge_case_no_missing():
     """User has ALL required skills — should return empty list."""
@@ -25,14 +23,14 @@ def test_edge_case_no_missing():
 
 def test_edge_case_case_insensitive():
     """Skill matching must be case-insensitive (e.g. 'docker' == 'Docker')."""
-    user = ["python", "docker"]          # lowercase
-    job  = ["Python", "Docker", "AWS"]   # mixed case
+    user = ["python", "docker"]         
+    job  = ["Python", "Docker", "AWS"]  
 
     result = get_missing_skills(user, job)
 
     assert "AWS" in result
-    assert "Python" not in result        # matched despite case difference
-    assert "Docker" not in result        # matched despite case difference
+    assert "Python" not in result       
+    assert "Docker" not in result       
 
 def test_edge_case_empty_user_skills():
     """User has no skills at all — all job skills are missing."""
