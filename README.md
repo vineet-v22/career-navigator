@@ -14,7 +14,7 @@ Vineet Verma
 **Scenario 2 — Skill-Bridge Career Navigator**
 
 ## Estimated Time Spent
-5–6 hours
+8–9 hours
 
 ---
 
